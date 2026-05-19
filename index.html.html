@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>สมุดโทรศัพท์ รพ.กองบิน ๔๑</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --cream2: #FFFDF8;
+    --brown-dark: #3A2810;
+    --brown-mid: #7B4F2E;
+    --brown-light: #C49A6C;
+    --brown-pale: #E8D5B0;
+    --brown-ultra: #F0E8D5;
+    --green-dark: #4A5C2E;
+    --green-mid: #5C6B3A;
+    --green-light: #F0F5E0;
+    --pink: #C4387A;
+    --pink-bg: #FDE8F2;
+    --blue-dark: #2E4A5C;
+    --orange-dark: #5C3A1E;
+  }
+
+  body {
+    font-family: 'Sarabun', sans-serif;
+    background: var(--cream);
+    color: var(--brown-dark);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--green-mid);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  header .logo {
+    width: 48px; height: 48px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: #fff;
+    flex-shrink: 0;
+  }
+  header h1 { font-size: 20px; font-weight: 600; color: #fff; }
+  header p { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 2px; }
+
+  /* MAIN */
+  main { max-width: 1100px; margin: 0 auto; padding: 1.5rem 1.25rem 3rem; }
+
+  /* SEARCH */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 1.25rem;
+  }
+  .search-wrap svg {
+    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+    width: 20px; height: 20px; color: var(--brown-light);
+  }
+  .search-wrap input {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border-radius: 14px;
+    border: 2px solid var(--brown-pale);
+    background: var(--cream2);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 15px;
+    color: var(--brown-dark);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .search-wrap input:focus { border-color: var(--brown-light); }
+  .search-wrap input::placeholder { color: #B8A080; }
+
+  /* TABS */
+  .tabs {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .tab {
+    padding: 7px 18px;
+    border-radius: 20px;
+    border: 1.5px solid var(--brown-pale);
+    background: var(--cream2);
+    font-family: 'Sarabun', sans-serif;
+    font-size: 13px;
+    color: var(--brown-mid);
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .tab:hover { border-color: var(--brown-light); }
+  .tab.active {
+    background: var(--green-mid);
+    color: #fff;
+    border-color: var(--green-mid);
+    font-weight: 500;
+  }
+
+  /* SECTION */
+  .section { margin-bottom: 1.75rem; }
+  .sec-header {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--green-mid);
+    color: var(--green-light);
+    padding: 12px 18px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+  }
+  .sec-header.cert { background: #2E4A5C; }
+  .sec-header.prov { background: #5C3A2E; }
+  .sec-header.staff { background: #5C4A2E; }
+  .sec-header svg { width: 20px; height: 20px; flex-shrink: 0; }
+  .sec-title { font-size: 15px; font-weight: 500; flex: 1; }
+  .sec-count {
+    background: rgba(255,255,255,0.22);
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 10px;
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 10px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--cream2);
+    border: 2px solid var(--brown-pale);
+    border-radius: 14px;
+    padding: 16px;
+    position: relative;
+    transition: border-color 0.15s, transform 0.1s;
+  }
+  .card:hover {
+    border-color: var(--brown-light);
+    transform: translateY(-2px);
+  }
+  .card-num {
+    position: absolute; top: 12px; right: 14px;
+    font-size: 11px; color: #C4A882; font-weight: 500;
+  }
+  .rank-pill {
+    display: inline-block;
+    background: var(--brown-ultra);
+    color: var(--brown-mid);
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .card-name {
+    font-size: 15px; font-weight: 600;
+    color: var(--brown-dark);
+    line-height: 1.35;
+    margin-bottom: 5px;
+    padding-right: 24px;
+  }
+  .card-nick {
+    font-size: 13px; color: #8B6A40;
+    display: flex; align-items: center; gap: 5px;
+    margin-bottom: 12px;
+  }
+  .card-nick::before { content: '•'; color: var(--brown-light); }
+
+  .phone-btn {
+    display: flex; align-items: center; gap: 8px;
+    background: var(--pink-bg);
+    border-radius: 9px;
+    padding: 9px 12px;
+    font-size: 13px; font-weight: 500;
+    color: var(--pink);
+    text-decoration: none;
+    transition: background 0.15s;
+    margin-top: 6px;
+  }
+  .phone-btn:first-of-type { margin-top: 0; }
+  .phone-btn:hover { background: #f9d0e8; }
+  .phone-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  /* NO RESULT */
+  .no-result {
+    text-align: center; padding: 3rem;
+    color: #B8A080; font-size: 15px;
+    grid-column: 1/-1;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 12px;
+    color: #B8A080;
+    border-top: 1px solid var(--brown-pale);
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 1rem 1.25rem; }
+    .grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 400px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.49a16 16 0 0 0 6 6l.93-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  </div>
+  <div>
+    <h1>สมุดโทรศัพท์ รพ.กองบิน ๔๑</h1>
+    <p>ข้อมูลติดต่อบุคลากรภายใน</p>
+  </div>
+</header>
+
+<main>
+  <div class="search-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="q" placeholder="ค้นหาชื่อ ยศ ชื่อเล่น หรือเบอร์โทร..." oninput="render()">
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="setTab('all',this)">ทั้งหมด</button>
+    <button class="tab" onclick="setTab('doctor',this)">แพทย์/เภสัช</button>
+    <button class="tab" onclick="setTab('cert',this)">สัญญาบัตร</button>
+    <button class="tab" onclick="setTab('prov',this)">ประทวน</button>
+    <button class="tab" onclick="setTab('staff',this)">พนักงาน/ลูกจ้าง</button>
+  </div>
+
+  <div id="results"></div>
+</main>
+
+<footer>รพ.กองบิน ๔๑ · ข้อมูลสำหรับใช้งานภายในเท่านั้น</footer>
+
+<script>
+const data = [
+  {g:'doctor',s:'แพทย์และเภสัชกร',rank:'น.อ.',name:'ณัฐวุฒิ เอมฤทัย',nick:'อาจารย์ต่าย',phones:['099-1414459']},
+  {g:'doctor',s:'แพทย์และเภสัชกร',rank:'น.อ.',name:'จักพันธุ์ เมืองแมน',nick:'อาจารย์ต่อ',phones:['097-157-0701','088-2528747']},
+  {g:'doctor',s:'แพทย์และเภสัชกร',rank:'น.ต.หญิง',name:'ชุติสรา มหาพรวิน',nick:'หมอชุ',phones:['089-4939016']},
+  {g:'doctor',s:'แพทย์และเภสัชกร',rank:'น.ต.หญิง',name:'อังค์วรา อินทรสมพันธ์',nick:'หมอแพรว',phones:['081-4020144']},
+  {g:'doctor',s:'แพทย์และเภสัชกร',rank:'ร.ท.หญิง',name:'พิมพ์ชนก วรวิทย์รัตนกุล',nick:'หมอได้',phones:['094-1544159']},
+  {g:'doctor',s:'แพทย์และเภสัชกร',rank:'ร.ต.หญิง',name:'ปาริณา จันทรงสกุล',nick:'หมอมุก',phones:['083-0258480']},
+  {g:'doctor',s:'แพทย์และเภสัชกร',rank:'น.ท.หญิง',name:'อัคค์สัญญา ไชยปัญญา',nick:'หมออ่า',phones:['097-4422464']},
+  {g:'doctor',s:'แพทย์และเภสัชกร',rank:'ร.อ.',name:'กรัญพัฒน์ หม้อกรอง',nick:'หมอกังฟู',phones:['087-7899323']},
+  {g:'cert',s:'ข้าราชการชั้นสัญญาบัตร',rank:'น.ท.หญิง',name:'ภาวิดา นวลศิริ',nick:'หัวหน้าเปิ้ล',phones:['092-4196532']},
+  {g:'cert',s:'ข้าราชการชั้นสัญญาบัตร',rank:'น.ท.หญิง',name:'รัตนา สมยาราช',nick:'หัวหน้าอ้อย',phones:['081-6663483']},
+  {g:'cert',s:'ข้าราชการชั้นสัญญาบัตร',rank:'น.ท.หญิง',name:'รัชฎาพร คำจริง',nick:'หัวหน้าตุ๊กตา',phones:['064-2456523']},
+  {g:'cert',s:'ข้าราชการชั้นสัญญาบัตร',rank:'น.ท.หญิง',name:'มัชฌิมา อุ่นโพธิ',nick:'หัวหน้านุ้ย',phones:['088-2669645']},
+  {g:'cert',s:'ข้าราชการชั้นสัญญาบัตร',rank:'น.ต.หญิง',name:'ขวัญทยา ชัยมงคล',nick:'หัวหน้าอิ้ว',phones:['080-4346543']},
+  {g:'cert',s:'ข้าราชการชั้นสัญญาบัตร',rank:'ร.อ.หญิง',name:'กันยภา ศรีชัย',nick:'หัวหน้าแจน',phones:['064-9629856']},
+  {g:'cert',s:'ข้าราชการชั้นสัญญาบัตร',rank:'ร.ต.',name:'จักรพงษ์ ปัญญา',nick:'หมวดเอ็ม',phones:['065-4498915']},
+  {g:'cert',s:'ข้าราชการชั้นสัญญาบัตร',rank:'ร.ต.',name:'ฐูปเจตน์ อวดครอง',nick:'หมวดพล',phones:['064-5514240']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.(พ)',name:'ศักดิ์ชาย สิงห์ชุม',nick:'จ่าศักดิ์ชาย',phones:['085-0658982']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.(พ)',name:'ทรงศักดิ์ น้องศิลา',nick:'จ่าหนึ่ง',phones:['088-4052789']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.(พ)',name:'ทิตัมพร ชัยเพชร',nick:'จ่าแชมป์',phones:['085-1469047']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.(พ)',name:'ยุทธนา ณ ลำปาง',nick:'จ่าอู๊ด',phones:['086-6213678']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.(พ)',name:'ปิติพงศ์ ปิงสุแสน',nick:'จ่าเอส',phones:['082-2426629']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.',name:'พงษ์พันธ์ มาลา',nick:'จ่าเต็ล',phones:['098-8922547']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.',name:'คาราศักดิ์ คำมี',nick:'จ่าเอ็ตตี้',phones:['095-9049664']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.',name:'รัตนวัชร์ ยุทธพงษ์พิชิตยะ',nick:'จ่าโก',phones:['097-9599494']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.',name:'วุฒิพงษ์ ทองประไพ',nick:'จ่าวุฒิ',phones:['088-2530335']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.',name:'รามเมศ พอสม',nick:'จ่าบอย',phones:['062-4245973']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.',name:'ภานุพัฒน์ พานเหล็ก',nick:'จ่าขัดเจน',phones:['088-5858747']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.อ.',name:'คชลักษณ์ วิริยะ',nick:'จ่าต้ม',phones:['080-2036170']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.ท.หญิง',name:'ชัชญา',nick:'จ่าเบล',phones:['064-9969655']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'พ.อ.ท.หญิง',name:'อัมพิกา ปฐมิหรัญสกุล',nick:'จ่ากวาง',phones:['099-2614162']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'จ.อ.',name:'อภิวัชญ์ ศรีคำ',nick:'จ่าราม',phones:['099-2010471']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'จ.อ.',name:'อนุฤทธิ์ กาขาว',nick:'จ่าป้อง',phones:['086-1982342']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'จ.อ.',name:'อนุพงศ์ พรมจักร',nick:'จ่าแบงค์',phones:['061-5294999']},
+  {g:'prov',s:'ข้าราชการชั้นประทวน',rank:'จ.อ.',name:'ธวัชชัย รักศรี',nick:'จ่าเปิ้ด',phones:['080-2121950']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นาง',name:'ถูมล สินธุยศ',nick:'พี่ป้อม',phones:['085-8688243']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นางสาว',name:'วริสร ไชยสถาน',nick:'พี่แอน',phones:['097-9253939']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นางสาว',name:'เกตุวดี เกตุวงค์',nick:'พี่เกตุ',phones:['093-2312288']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นางสาว',name:'วัลภา ตื้มาน',nick:'พี่ต้อม',phones:['063-4165024']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นางสาว',name:'ปาณิสรา บุญประเสริฐ',nick:'พี่โอ',phones:['098-005-9402']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นางสาว',name:'กฤทพร ชัยมงคล',nick:'พี่ป๊อป',phones:['082-3569571']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นาย',name:'ยุทธนา หนักพู',nick:'พี่หนึ่ง',phones:['061-820-4581']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นาง',name:'รังสินี เหล่าจันทร์',nick:'พี่แอ้',phones:['081-387-2624']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นาย',name:'ศุภัช โพธิยอง',nick:'พี่กาณต์',phones:['096-796-7239']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นางสาว',name:'กัลยา กระแยม',nick:'พี่ตูน',phones:['096-354-6198']},
+  {g:'staff',s:'พนักงานราชการและลูกจ้าง',rank:'นางสาว',name:'วิโลลักษณ์ สิทธิพาณิชย์',nick:'พี่น้ำฝน',phones:['093-159-2369']},
+];
+
+const secMeta = {
+  doctor: { cls: '', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg>' },
+  cert:   { cls: 'cert', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L14.5 7.5l4.574.668a.5.5 0 0 1 .278.854l-3.309 3.214.781 4.55a.5.5 0 0 1-.726.529L12 15.27l-4.098 2.045a.5.5 0 0 1-.726-.53l.782-4.549-3.31-3.214a.5.5 0 0 1 .279-.854L9.5 7.5z"/></svg>' },
+  prov:   { cls: 'prov', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>' },
+  staff:  { cls: 'staff', icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>' },
+};
+
+const phoneIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.49a16 16 0 0 0 6 6l.93-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+
+let activeTab = 'all';
+
+function setTab(t, el) {
+  activeTab = t;
+  document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+  el.classList.add('active');
+  render();
+}
+
+function render() {
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const container = document.getElementById('results');
+
+  let filtered = data.filter(p => {
+    const mTab = activeTab === 'all' || p.g === activeTab;
+    const mQ = !q || p.name.toLowerCase().includes(q) || p.nick.toLowerCase().includes(q)
+      || p.rank.toLowerCase().includes(q) || p.phones.some(ph => ph.includes(q));
+    return mTab && mQ;
+  });
+
+  if (!filtered.length) {
+    container.innerHTML = '<p style="text-align:center;padding:3rem;color:#B8A080;">ไม่พบรายชื่อที่ค้นหา</p>';
+    return;
+  }
+
+  const order = ['doctor', 'cert', 'prov', 'staff'];
+  const sections = {};
+  filtered.forEach(p => { if (!sections[p.g]) sections[p.g] = []; sections[p.g].push(p); });
+
+  let num = 0;
+  let html = '';
+  order.forEach(gk => {
+    if (!sections[gk]) return;
+    const persons = sections[gk];
+    const m = secMeta[gk];
+    html += `<div class="section">
+      <div class="sec-header ${m.cls}">${m.icon}<span class="sec-title">${persons[0].s}</span><span class="sec-count">${persons.length} คน</span></div>
+      <div class="grid">`;
+    persons.forEach(p => {
+      num++;
+      const phoneHtml = p.phones.map(ph =>
+        `<a class="phone-btn" href="tel:${ph.replace(/[-\s]/g,'')}">${phoneIcon}${ph}</a>`
+      ).join('');
+      html += `<div class="card">
+        <span class="card-num">#${num}</span>
+        <div class="rank-pill">${p.rank}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-nick">${p.nick}</div>
+        ${phoneHtml}
+      </div>`;
+    });
+    html += '</div></div>';
+  });
+
+  container.innerHTML = html;
+}
+
+render();
+</script>
+</body>
+</html>
